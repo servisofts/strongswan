@@ -1,0 +1,18 @@
+services:
+  strongswan:
+    image: servisofts/strongswan
+    build: .
+    stdin_open: true
+    tty: true
+    privileged: true
+    environment:
+      - CN=servisofts-new
+      - IP=192.168.0.199
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
+    volumes:
+      - ./conf:/app/conf
+      - ./pki:/app/pki
+    # command: init-certs
+    
