@@ -3,8 +3,6 @@ services:
     image: servisofts/strongswan
     build: .
     stdin_open: true
-    tty: true
-    privileged: true
     ports:
       - 500:500/udp
       - 4500:4500/udp
