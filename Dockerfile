@@ -1,8 +1,9 @@
 FROM ubuntu:22.04
 WORKDIR /app
 ENV IP=192.168.0.199
+RUN echo 'root:root' | chpasswd
 RUN apt update 
-RUN apt install systemd -y
+RUN apt-get install -y systemd systemd-sysv dbus dbus-user-session
 RUN apt install strongswan strongswan-pki libcharon-extra-plugins libcharon-extauth-plugins libstrongswan-extra-plugins -y
 RUN mkdir /app/pki
 RUN mkdir /app/pki/private
@@ -25,6 +26,6 @@ COPY ["./ipsec.conf", "/etc/ipsec.conf"]
 COPY ["./ipsec.secrets", "/etc/ipsec.secrets"]
 COPY ["./start.sh", "start.sh"]
 EXPOSE 500 4500
-RUN ["sh", "start.sh"]
-
+# ENTRYPOINT /ect/init.d/strongswan-starter start && /bin/bash
+ENTRYPOINT ["/sbin/init"]
 
