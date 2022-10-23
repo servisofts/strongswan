@@ -26,7 +26,7 @@ COPY ["./ipsec.conf", "/etc/ipsec.conf"]
 COPY ["./ipsec.secrets", "/etc/ipsec.secrets"]
 COPY ["./start.sh", "start.sh"]
 RUN ["systemctl", "enable", "strongswan-starter"]
-EXPOSE 500 4500
+EXPOSE 500/udp 4500/udp
 # ENTRYPOINT /ect/init.d/strongswan-starter start && /bin/bash
 ENTRYPOINT ["/sbin/init"]
 
