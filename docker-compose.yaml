@@ -8,5 +8,10 @@ services:
     ports:
       - 500:500/udp
       - 4500:4500/udp
-    volumes: 
-      - ./bin/ipsec.conf:/etc/ipsec.conf:rw
+    volumes:
+      - ./env/:/env/
+      - ./env/pki/:/app/pki/
+      - ./env/cacerts/:/etc/ipsec.d/cacerts/
+    command: sh /env/create_certs.sh && sh /env/start.sh
+    
+    
