@@ -1,2 +1,3 @@
+#/bin/bash
 
-systemctl restart strongswan
+echo "Bash for start"

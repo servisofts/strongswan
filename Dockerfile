@@ -29,4 +29,4 @@ RUN ["systemctl", "enable", "strongswan-starter"]
 EXPOSE 500/udp 4500/udp
 # ENTRYPOINT /ect/init.d/strongswan-starter start && /bin/bash
 ENTRYPOINT ["/sbin/init"]
-
+CMD ["bash start.sh"]
