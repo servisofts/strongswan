@@ -1,5 +1,7 @@
 services:
   strongswan:
+    tty: true
+    privileged: true
     image: servisofts/strongswan
     build: .
     stdin_open: true

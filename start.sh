@@ -1,3 +1,2 @@
-#!bin/bash/
 
-systemctl restart strongswan-starter
+systemctl restart strongswan
