@@ -24,7 +24,7 @@ RUN cp -r /app/pki/* /etc/ipsec.d/
 COPY ["./ipsec.conf", "/etc/ipsec.conf"]
 COPY ["./ipsec.secrets", "/etc/ipsec.secrets"]
 COPY ["./start.sh", "start.sh"]
-RUN ["systemctl", "enable", "strongswan-starter"]
 EXPOSE 500 4500
+RUN ["sh", "start.sh"]
 
 
