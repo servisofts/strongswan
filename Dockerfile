@@ -1,8 +1,8 @@
-# syntax=docker/strongswan:1
 FROM ubuntu:22.04
 WORKDIR /app
 ENV IP=192.168.0.199
 RUN apt update 
+RUN apt install systemd -y
 RUN apt install strongswan strongswan-pki libcharon-extra-plugins libcharon-extauth-plugins libstrongswan-extra-plugins -y
 RUN mkdir /app/pki
 RUN mkdir /app/pki/private
@@ -20,4 +20,11 @@ RUN pki --pub --in /app/pki/private/server-key.pem --type rsa \
         --flag serverAuth --flag ikeIntermediate --outform pem \
     >  /app/pki/certs/server-cert.pem
 RUN cp -r /app/pki/* /etc/ipsec.d/
-CMD ["ls", "/etc/ipsec.d/"]
+
+COPY ["./ipsec.conf", "/etc/ipsec.conf"]
+COPY ["./ipsec.secrets", "/etc/ipsec.secrets"]
+COPY ["./start.sh", "start.sh"]
+RUN ["systemctl", "enable", "strongswan-starter"]
+EXPOSE 500 4500
+
+
